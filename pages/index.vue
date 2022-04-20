@@ -4,34 +4,15 @@
       <h1>Get the latest tech news!</h1>
     </section>
 
-    <section class="featured-posts">
-      <PostPreview
-        id="1"
-        thumbnail="https://images.ctfassets.net/hrltx12pl8hq/4Gm9a6lQkjssolwXfpN1qV/2f45dc21404aac7b3b6e26b5c6827f7b/01-technology_1421446100.jpg?fit=fill&w=480&h=270"
-        title="Hello There"
-        previewText="Preview text"
-      />
-      <PostPreview 
-        id="2"
-        thumbnail="https://images.ctfassets.net/hrltx12pl8hq/4Gm9a6lQkjssolwXfpN1qV/2f45dc21404aac7b3b6e26b5c6827f7b/01-technology_1421446100.jpg?fit=fill&w=480&h=270"
-        title="Hello There 1"
-        previewText="Preview text 1"
-      />
-      <PostPreview 
-         id="3"
-        thumbnail="https://images.ctfassets.net/hrltx12pl8hq/4Gm9a6lQkjssolwXfpN1qV/2f45dc21404aac7b3b6e26b5c6827f7b/01-technology_1421446100.jpg?fit=fill&w=480&h=270"
-        title="Hello There 2"
-        previewText="Preview text 2"
-      />
-    </section>
+    <PostList isAdmin />
   </div>
 </template>
 
 <script>
-import PostPreview from "@/components/Posts/PostPreview.vue";
+import PostList from "@/components/Posts/PostList.vue";
 export default {
   components: {
-    PostPreview,
+    PostList,
   },
 };
 </script>
@@ -42,6 +23,7 @@ export default {
   position: relative;
   padding: 30px;
   box-sizing: border-box;
+  background-image: url("~assets/images/main-page-background.jpg");
   background-position: center;
   background-size: cover;
 }
