@@ -48,6 +48,7 @@ export default {
   methods: {
     onSave() {
       // save the post
+      this.$emit("submit", this.editedPost);
     },
     onCancel() {
       // Navigate back

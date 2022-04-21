@@ -4,7 +4,7 @@
       <h1>Get the latest tech news!</h1>
     </section>
 
-    <PostList isAdmin />
+    <PostList :posts="loadedPosts" />
   </div>
 </template>
 
@@ -13,6 +13,11 @@ import PostList from "@/components/Posts/PostList.vue";
 export default {
   components: {
     PostList,
+  },
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    },
   },
 };
 </script>
