@@ -9,10 +9,14 @@
 </template>
 
 <script>
+// Because
 import PostList from "@/components/Posts/PostList.vue";
 export default {
   components: {
     PostList,
+  },
+  head: {
+    title: "WD Blog",
   },
   computed: {
     loadedPosts() {

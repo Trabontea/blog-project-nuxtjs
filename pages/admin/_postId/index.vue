@@ -1,28 +1,43 @@
 <template>
   <div class="admin-post-page">
     <section class="update-form">
-      <AdminPostForm :post="loadedPost" />
+      <AdminPostForm :post="loadedPost" @submit="onSubmitted" />
     </section>
   </div>
 </template>
 <script>
 import AdminPostForm from "@/components/Admin/AdminPostForm";
+import axios from "axios";
 
 export default {
   layout: "admin",
+   middleware: ["check-auth", "auth"],
   components: {
     AdminPostForm,
   },
-  data() {
-    return {
-      loadedPost: {
-        author: "Daniel",
-        title: "My awsome post",
-        content: "Content for the post ",
-        thumbnailLink:
-          "https://images.ctfassets.net/hrltx12pl8hq/4Gm9a6lQkjssolwXfpN1qV/2f45dc21404aac7b3b6e26b5c6827f7b/01-technology_1421446100.jpg?fit=fill&w=480&h=270",
-      },
-    };
+  // se foloseste cand vrem sa luam pe o pagina informatiile
+  // postId vine din denumirea fisierului!!!!!! boule!!!
+  asyncData(context) {
+    console.log("context:::", context);
+    return axios
+      .get(
+        "https://nuxt-blog-2a7b7-default-rtdb.europe-west1.firebasedatabase.app/posts/" +
+          context.params.postId +
+          ".json"
+      )
+      .then((res) => {
+        return {
+          loadedPost: { ...res.data, id: context.params.postId },
+        };
+      })
+      .catch((e) => context.error(e));
+  },
+  methods: {
+    onSubmitted(editedPost) {
+      this.$store.dispatch("editPost", editedPost).then(() => {
+        this.$router.push("/admin");
+      });
+    },
   },
 };
 </script>

@@ -4,10 +4,14 @@
       <h1 class="post-title">{{ loadedPost.title }}</h1>
       <h3 class="post-content">{{ loadedPost.previewText }}</h3>
       <div class="post-details">
-        <div class="post-detail">{{ loadedPost.updatedDate }}</div>
-        <div class="post-detail">{{ loadedPost.content }}</div>
+        <div class="post-detail">
+          Last updated on: {{ loadedPost.updatedDate | date }}
+        </div>
+        <div class="post-detail">Written by: {{ loadedPost.author }}</div>
       </div>
+      <div class="post-detail">{{ loadedPost.content }}</div>
     </section>
+    <hr />
     <section class="post-feedback">
       <p>
         Let me know what you think about the post, send a mail to
@@ -22,28 +26,17 @@
 <script>
 export default {
   asyncData(context) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          loadedPost: {
-            id: "1",
-            title: "First Post (ID: " + context.params.id + ")",
-            previewText: "This is our first post!",
-            author: "daniel",
-            updatedDate: new Date(),
-            content: "Some dummy test which is definitely not the good test",
-            thumbnail:
-              "https://images.ctfassets.net/hrltx12pl8hq/4Gm9a6lQkjssolwXfpN1qV/2f45dc21404aac7b3b6e26b5c6827f7b/01-technology_1421446100.jpg?fit=fill&w=480&h=270",
-          },
-        });
-      }, 1000);
-    })
+    return context.app.$axios
+      .$get("/posts/" + context.params.id + ".json")
       .then((data) => {
-        return data;
+        return {
+          loadedPost: data,
+        };
       })
-      .catch((e) => {
-        context.error(e);
-      });
+      .catch((e) => context.error(e));
+  },
+  head: {
+    title: "A blog Post",
   },
 };
 </script>

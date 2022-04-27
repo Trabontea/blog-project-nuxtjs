@@ -12,18 +12,15 @@ import AdminPostForm from "@/components/Admin/AdminPostForm";
 
 export default {
   layout: "admin",
+   middleware: ["check-auth", "auth"],
   components: {
     AdminPostForm,
   },
   methods: {
     onSubmitted(postData) {
-      axios
-        .post(
-          "https://nuxt-blog-2a7b7-default-rtdb.europe-west1.firebasedatabase.app/posts.json",
-          postData
-        )
-        .then((result) => console.log(result))
-        .catch((e) => console.log(e));
+      this.$store
+        .dispatch("addPost", postData)
+        .then(() => this.$router.push("/admin"));
     },
   },
 };

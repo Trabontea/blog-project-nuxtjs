@@ -1,49 +1,39 @@
 import Vuex from "vuex";
+import { actions } from "./actions";
 
 const createStore = () => {
   return new Vuex.Store({
     state: {
       loadedPosts: [],
+      token: null,
     },
     mutations: {
       setPosts(state, posts) {
         state.loadedPosts = posts;
       },
-    },
-    actions: {
-      nuxtServerInit(vuexContext, context) {
-        if (!process.client) {
-          console.log(context.req.session);
-        }
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            vuexContext.commit("setPosts", [
-              {
-                id: "1",
-                title: "first post",
-                previewText: "This is our first post!",
-                thumbnail:
-                  "https://images.ctfassets.net/hrltx12pl8hq/4Gm9a6lQkjssolwXfpN1qV/2f45dc21404aac7b3b6e26b5c6827f7b/01-technology_1421446100.jpg?fit=fill&w=480&h=270",
-              },
-              {
-                id: "2",
-                title: "Second post",
-                previewText: "This is our Second post!",
-                thumbnail:
-                  "https://images.ctfassets.net/hrltx12pl8hq/4Gm9a6lQkjssolwXfpN1qV/2f45dc21404aac7b3b6e26b5c6827f7b/01-technology_1421446100.jpg?fit=fill&w=480&h=270",
-              },
-            ]);
-            resolve();
-          }, 1500);
-        });
+      addPost(state, post) {
+        state.loadedPosts.push(post);
       },
-      setPosts(vuexContext, posts) {
-        vuexContext.commit("setPosts", posts);
+      editPost(state, editedPost) {
+        const postIndex = state.loadedPosts.findIndex(
+          (post) => post.id === editedPost.id
+        );
+        state.loadedPosts[postIndex] = editedPost;
+      },
+      setToken(state, token) {
+        state.token = token;
+      },
+      clearToken(state) {
+        state.token = null;
       },
     },
+    actions: actions,
     getters: {
       loadedPosts(state) {
         return state.loadedPosts;
+      },
+      isAuthenticated(state) {
+        return state.token !== null;
       },
     },
   });

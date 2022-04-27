@@ -3,12 +3,16 @@
 </template>
 
 <script>
-import PostList from "@/components/Posts/PostList";
+// This component is loading in plugin before
+//import PostList from "@/components/Posts/PostList";
 export default {
-  components: {
-    PostList,
-  },
-  //lifecycle method
+  middleware: "log",
+
+  // components: {
+  //   PostList,
+  // },
+
+  // ***lifecycle method
   computed: {
     loadedPosts() {
       return this.$store.getters.loadedPosts;
