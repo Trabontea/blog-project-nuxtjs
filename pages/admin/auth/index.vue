@@ -18,6 +18,9 @@
         >
       </form>
     </div>
+    <div class="back-to-home">
+      <nuxt-link to="/">Back to blogs</nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -68,5 +71,11 @@ export default {
   margin: auto;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.back-to-home {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 </style>

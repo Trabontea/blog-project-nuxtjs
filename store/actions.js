@@ -86,6 +86,9 @@ export const actions = {
           "expirationDate",
           new Date().getTime + Number.parseInt(result.expiresIn) * 1000
         );
+        return this.$axios.$post("http://localhost:3000/api/track-data", {
+          data: "Authenthicated",
+        });
       })
       .catch((e) => console.log(e));
   },
@@ -136,6 +139,3 @@ export const actions = {
     }
   },
 };
-
-
-

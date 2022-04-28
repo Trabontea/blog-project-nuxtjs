@@ -1,6 +1,7 @@
+const bodyParser = require("body-parser");
 export default {
-  //mode: "universal", // nu mai e in version 2
-  // ssr: false,
+  //mode: "spa", // nu mai e in version 2
+  ssr: true,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "WD Blog",
@@ -73,6 +74,7 @@ export default {
     name: "page",
     mode: "out-in",
   },
+  serverMiddleware: [bodyParser.json(), "~/api"],
   // router: {
   //   middleware: "log",
   // },
