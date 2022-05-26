@@ -30,7 +30,7 @@ export const actions = {
           id: result.data.name,
         });
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log("errroor", e));
   },
   editPost(vuexContext, editedPost) {
     return axios
@@ -45,7 +45,7 @@ export const actions = {
         console.log(res);
         vuexContext.commit("editPost", editedPost);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log("errroor", e));
   },
   setPosts(vuexContext, posts) {
     vuexContext.commit("setPosts", posts);

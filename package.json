@@ -5,7 +5,7 @@
   "author": "Daniel Botea",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt --port 3000",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
